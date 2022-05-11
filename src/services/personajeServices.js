@@ -2,7 +2,9 @@ import dbHelperAll from '../Utils/helperAll.js'
 import dbHelperNombre from '../Utils/helperNombre.js'
 import dbHelperEdad from '../Utils/helperEdad.js'
 import dbHelperNombreEdad from '../Utils/helperNombreEdad.js'
+import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
 import 'dotenv/config'
+import { response } from 'express'
 
 
 export class personajeService {
@@ -32,15 +34,12 @@ export class personajeService {
 
     getpersonajeById = async(id) => {
         console.log('Get by ID');
-        const query = `SELECT Personaje.Imagen, Personaje.edad, Personaje.peso, Personaje.historia, Personaje.comidaFavorita, Personaje.Nombre, PeliSerie.imagen, PeliSerie.Titulo
-        FROM Personaje, PeliSerie`;
-        const response = await dbHelperAll(id, undefined, query, undefined);
-        if(response==null){
-            return res.status(404);
-        }else{
-            console.log(response) 
-        return response.recordset[0];
-        }
+        const query = `SELECT * FROM Personaje WHERE id=@id`;
+        const query2 = `SELECT PeliSerie.* FROM PeliSerie, Personaje , PersonajeXPeliSerie WHERE PeliSerie.id = PersonajeXPeliSerie.idPeliSerie and Personaje.id = PersonajeXPeliSerie.idPersonaje`
+        const personaje = await dbHelperAll(id, undefined, query);
+        const PeliSerie = await dbHelperPeliSerie(id, undefined, query2);
+        personaje.recordset[0].PeliculasSeries=PeliSerie.recordset;
+        return personaje.recordset[0];
     }
 
     createpersonaje = async(personaje) => {

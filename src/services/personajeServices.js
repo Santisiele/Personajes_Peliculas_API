@@ -41,7 +41,7 @@ export class personajeService {
         personaje.recordset[0].PeliculasSeries=PeliSerie.recordset;
         return personaje.recordset[0];
     }
-
+//
     createpersonaje = async(personaje) => {
         console.log('Create');
         const query = `INSERT INTO Personaje(imagen, nombre, edad, peso, historia, comidaFavorita) VALUES (@imagen, @nombre, @edad, @peso, @historia, @comidaFavorita)`

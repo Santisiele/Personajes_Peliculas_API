@@ -17,8 +17,8 @@ export class moviesServices {
         console.log('Get by ID');
         const query = `SELECT * FROM PeliSerie WHERE id=@id`;
         const query2 = `SELECT Personaje.* FROM PeliSerie, Personaje , PersonajeXPeliSerie WHERE PeliSerie.id = PersonajeXPeliSerie.idPeliSerie and Personaje.id = PersonajeXPeliSerie.idPersonaje`
-        const personaje = await dbHelperAll(id, undefined, query);
-        const PeliSerie = await dbHelperPeliSerie(id, undefined, query2);
+        const personaje = await dbHelperAll(id, undefined, query2);
+        const PeliSerie = await dbHelperPeliSerie(id, undefined, query);
         PeliSerie.recordset[0].Personajes=personaje.recordset;
         return PeliSerie.recordset[0];
     }

@@ -7,8 +7,9 @@ const moviesSer = new moviesServices()
 
 router.get('/', Authenticate, async(req, res) => {
     let titulo = req.query.titulo;
+    let orden = req.query.order;
 
-    const movies = await moviesSer.getMovies(titulo);
+    const movies = await moviesSer.getMovies(titulo, orden);
 
     return res.status(200).json(movies);
 });

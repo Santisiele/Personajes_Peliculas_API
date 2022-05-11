@@ -6,15 +6,20 @@ import { response } from 'express'
 
 
 export class moviesServices {
-    getMovies = async(titulo) => {
+    getMovies = async(titulo, orden) => {
         console.log('Get all');
         let response = 0;
-        if(titulo != undefined){
+        if(titulo){
             const query = `SELECT * FROM PeliSerie WHERE titulo = @titulo`;
             response = await dbHelperTitulo(titulo, query);
         }else{
-            const query = `SELECT * FROM PeliSerie`;
-            response = await dbHelperPeliSerie(undefined, undefined, query);
+            if(orden){
+                const query = `SELECT * FROM PeliSerie ORDER BY titulo ${orden}`;
+                response = await dbHelperPeliSerie(undefined, undefined, query);
+            }else{
+                const query = `SELECT * FROM PeliSerie`;
+                response = await dbHelperPeliSerie(undefined, undefined, query); 
+            }
         }
         return response.recordset;
     }

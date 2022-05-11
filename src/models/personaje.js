@@ -1,4 +1,4 @@
-export class Pizza {
+export class Personaje {
     id;
     imagen;
     nombre;

@@ -14,7 +14,7 @@ app.use(express.json());
 passport.use(jwtStrategy);
 app.use(passport.initialize());
 
-app.use("/personaje", personajeRouter);
+app.use("/character", personajeRouter);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

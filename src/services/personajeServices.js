@@ -32,7 +32,8 @@ export class personajeService {
 
     getpersonajeById = async(id) => {
         console.log('Get by ID');
-        const query = `SELECT * FROM Personaje WHERE id = @id`;
+        const query = `SELECT Personaje.Imagen, Personaje.edad, Personaje.peso, Personaje.historia, Personaje.comidaFavorita, Personaje.Nombre, PeliSerie.imagen, PeliSerie.Titulo
+        FROM Personaje, PeliSerie`;
         const response = await dbHelperAll(id, undefined, query, undefined);
         if(response==null){
             return res.status(404);

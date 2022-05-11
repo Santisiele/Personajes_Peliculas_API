@@ -41,7 +41,7 @@ export class personajeService {
         personaje.recordset[0].PeliculasSeries=PeliSerie.recordset;
         return personaje.recordset[0];
     }
-//
+
     createpersonaje = async(personaje) => {
         console.log('Create');
         const query = `INSERT INTO Personaje(imagen, nombre, edad, peso, historia, comidaFavorita) VALUES (@imagen, @nombre, @edad, @peso, @historia, @comidaFavorita)`
@@ -50,7 +50,7 @@ export class personajeService {
         return response.recordset;
     }
 
-    updatepersonajeById = async(id, personaje) => {
+    updatepersonajeById = async(id, PeliSerie) => {
         console.log('Update by ID');
         const query = `UPDATE Personaje SET imagen = @imagen, nombre = @nombre, edad = @edad, peso = @peso, historia = @historia, comidaFavorita = @comidaFavorita WHERE id = @Id`
         const response = await dbHelperAll(id, personaje, query);

@@ -1,15 +1,21 @@
 import dbHelperAll from '../Utils/helperAll.js'
 import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
+import dbHelperTitulo from '../Utils/helperTitulo.js'
 import 'dotenv/config'
 import { response } from 'express'
 
 
 export class moviesServices {
-    getMovies = async() => {
+    getMovies = async(titulo) => {
         console.log('Get all');
         let response = 0;
-        const query = `SELECT * FROM PeliSerie`;
-        response = await dbHelperPeliSerie(undefined, undefined, query);
+        if(titulo != undefined){
+            const query = `SELECT * FROM PeliSerie WHERE titulo = @titulo`;
+            response = await dbHelperTitulo(titulo, query);
+        }else{
+            const query = `SELECT * FROM PeliSerie`;
+            response = await dbHelperPeliSerie(undefined, undefined, query);
+        }
         return response.recordset;
     }
 
@@ -22,5 +28,27 @@ export class moviesServices {
         PeliSerie.recordset[0].Personajes=personaje.recordset;
         return PeliSerie.recordset[0];
     }
-    
+
+    createMovie = async(PeliSerie) => {
+        console.log('Create');
+        const query = `INSERT INTO PeliSerie(imagen, titulo, fechaCreacion, clasificacion) VALUES (@imagen, @titulo, @fechaCreacion, @clasificacion)`
+        const response = await dbHelperPeliSerie(undefined, PeliSerie, query);
+
+        return response.recordset;
+    }
+
+    updateMovieById = async(id, PeliSerie) => {
+        console.log('Update by ID');
+        const query = `UPDATE PeliSerie SET imagen = @imagen, titulo = @titulo, fechaCreacion = @fechaCreacion, clasificacion = @clasificacion WHERE id = @Id`
+        const response = await dbHelperPeliSerie(id, PeliSerie, query);
+
+        return response.recordset;
+    }
+
+    deleteMovieById = async(id) => {
+        console.log('Delete by ID');
+        const query = `DELETE FROM PeliSerie WHERE id = @id`
+        const response = await dbHelperPeliSerie(id, undefined, query);
+        return response.recordset;
+    }
 }

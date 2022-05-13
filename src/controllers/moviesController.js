@@ -25,10 +25,13 @@ router.get('/:id', Authenticate, async(req, res) => {
 
 router.post('', Authenticate, async(req, res) => {
     console.log(`This is a post operation`);
+    if((req.body.calificaion>5) || (req.body.calificaion<1)){
+        res.status(400)("La calificaion debe estar entre 1 y 5")
+    }else{
+        const peliSerieCreada = await moviesSer.createMovie(req.body);
 
-    const peliSerieCreada = await moviesSer.createMovie(req.body);
-
-    return res.status(201).json(peliSerieCreada);
+        return res.status(201).json(peliSerieCreada);
+    }
 });
 
 router.put('/:id',Authenticate, async(req, res) => {

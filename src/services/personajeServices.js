@@ -6,6 +6,9 @@ import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
 import 'dotenv/config'
 import { response } from 'express'
 
+const tablaPersonaje=process.env.DB_TABLA_personaje;
+const tablaPeliSerie=process.env.DB_TABLA_peliserie;
+const tablaInter=process.env.DB_TABLA_intermedia;
 
 export class personajeService {
     getpersonaje = async(nombre, edad) => {
@@ -16,15 +19,15 @@ export class personajeService {
                 const query = `sp_GetAll`;
                 response = await dbHelperAll(undefined, undefined, query);
             } else {
-                const query = `SELECT * FROM Personaje WHERE edad = @edad`;
+                const query = `SELECT * FROM ${tablaPersonaje} WHERE edad = @edad`;
                 response = await dbHelperEdad(edad, query);
             }
         }else {
             if(edad){
-                const query = `SELECT * FROM Personaje WHERE nombre = @nombre AND edad = @edad`;
+                const query = `SELECT * FROM ${tablaPersonaje} WHERE nombre = @nombre AND edad = @edad`;
                 response = await dbHelperNombreEdad(nombre, edad, query);
             }else{
-                const query = `SELECT * FROM Personaje WHERE nombre = @nombre`;
+                const query = `SELECT * FROM ${tablaPersonaje} WHERE nombre = @nombre`;
                 response = await dbHelperNombre(nombre, query);
             }
         }
@@ -34,8 +37,8 @@ export class personajeService {
 
     getpersonajeById = async(id) => {
         console.log('Get by ID');
-        const query = `SELECT * FROM Personaje WHERE id=@id`;
-        const query2 = `SELECT PeliSerie.* FROM PeliSerie, Personaje , PersonajeXPeliSerie WHERE PeliSerie.id = PersonajeXPeliSerie.idPeliSerie and Personaje.id = PersonajeXPeliSerie.idPersonaje`
+        const query = `SELECT * FROM ${tablaPersonaje} WHERE id=@id`;
+        const query2 = `SELECT PeliSerie.* FROM ${tablaPeliSerie}, ${tablaPersonaje} , ${tablaInter} WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`
         const personaje = await dbHelperAll(id, undefined, query);
         const PeliSerie = await dbHelperPeliSerie(id, undefined, query2);
         personaje.recordset[0].PeliculasSeries=PeliSerie.recordset;
@@ -44,7 +47,7 @@ export class personajeService {
 
     createpersonaje = async(personaje) => {
         console.log('Create');
-        const query = `INSERT INTO Personaje(imagen, nombre, edad, peso, historia, comidaFavorita) VALUES (@imagen, @nombre, @edad, @peso, @historia, @comidaFavorita)`
+        const query = `INSERT INTO ${tablaPersonaje}(imagen, nombre, edad, peso, historia, comidaFavorita) VALUES (@imagen, @nombre, @edad, @peso, @historia, @comidaFavorita)`
         const response = await dbHelperAll(undefined, personaje, query);
 
         return response.recordset;
@@ -52,7 +55,7 @@ export class personajeService {
 
     updatepersonajeById = async(id, PeliSerie) => {
         console.log('Update by ID');
-        const query = `UPDATE Personaje SET imagen = @imagen, nombre = @nombre, edad = @edad, peso = @peso, historia = @historia, comidaFavorita = @comidaFavorita WHERE id = @Id`
+        const query = `UPDATE ${tablaPersonaje} SET imagen = @imagen, nombre = @nombre, edad = @edad, peso = @peso, historia = @historia, comidaFavorita = @comidaFavorita WHERE id = @Id`
         const response = await dbHelperAll(id, personaje, query);
 
         return response.recordset;
@@ -60,7 +63,7 @@ export class personajeService {
 
     deletepersonajeById = async(id) => {
         console.log('Delete by ID');
-        const query = `DELETE FROM Personaje WHERE id = @id`
+        const query = `DELETE FROM ${tablaPersonaje} WHERE id = @id`
         const response = await dbHelperAll(id, undefined, query);
         return response.recordset;
     }

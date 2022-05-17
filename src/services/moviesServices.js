@@ -1,6 +1,5 @@
 import dbHelperAll from '../Utils/helperAll.js'
 import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
-import dbHelperTitulo from '../Utils/helperTitulo.js'
 import 'dotenv/config'
 
 const tablaPersonaje=process.env.DB_TABLA_personaje;
@@ -12,8 +11,8 @@ export class moviesServices {
         console.log('Get all');
         let response = 0;
         if(titulo){
-            const query = c;
-            response = await dbHelperTitulo(titulo, query);
+            const query = `SELECT * FROM ${tablaPeliSerie} WHERE titulo = @titulo`;
+            response = await dbHelperPeliSerie(undefined, titulo, query);
         }else{
             if(orden){
                 const query = `SELECT * FROM ${tablaPeliSerie} ORDER BY titulo ${orden}`;

@@ -1,7 +1,4 @@
 import dbHelperAll from '../Utils/helperAll.js'
-import dbHelperNombre from '../Utils/helperNombre.js'
-import dbHelperEdad from '../Utils/helperEdad.js'
-import dbHelperNombreEdad from '../Utils/helperNombreEdad.js'
 import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
 import 'dotenv/config'
 
@@ -14,7 +11,7 @@ export class personajeService {
     getpersonaje = async(nombre, edad,peso,idMovie) => {
         console.log('Get all');
         let response = 0;
-        let query = `SELECT * FROM ${tablaPersonaje}`
+        let query = `SELECT ${tablaPersonaje}.* FROM ${tablaPersonaje}, ${tablaInter}, ${tablaPeliSerie}`
         let ifWhere = false;
         if(nombre){
             if(!ifWhere){
@@ -27,7 +24,7 @@ export class personajeService {
         if(edad){
             if(!ifWhere){
                 ifWhere=true
-                query+= `, ${tablaPeliSerie}, ${tablaInter} WHERE edad = @edad`;
+                query+= ` WHERE edad = @edad`;
             }else{
                 query+= ` and edad = @edad`;
             }
@@ -54,7 +51,7 @@ export class personajeService {
     getpersonajeById = async(id) => {
         console.log('Get by ID');
         const query = `SELECT * FROM ${tablaPersonaje} WHERE id=@id`;
-        const query2 = `SELECT PeliSerie.* FROM ${tablaPeliSerie}, ${tablaPersonaje} , ${tablaInter} WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`
+        const query2 = `SELECT PeliSerie.* FROM ${tablaPeliSerie}, ${tablaPersonaje} , ${tablaInter} WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje and ${tablaPersonaje}.id = @id`
         const personaje = await dbHelperAll(id, undefined, query);
         const PeliSerie = await dbHelperPeliSerie(id, undefined, query2);
         personaje.recordset[0].PeliculasSeries=PeliSerie.recordset;
@@ -69,7 +66,7 @@ export class personajeService {
         return response.recordset;
     }
 
-    updatepersonajeById = async(id, PeliSerie) => {
+    updatepersonajeById = async(id, personaje) => {
         console.log('Update by ID');
         const query = `UPDATE ${tablaPersonaje} SET imagen = @imagen, nombre = @nombre, edad = @edad, peso = @peso, historia = @historia, comidaFavorita = @comidaFavorita WHERE id = @Id`
         const response = await dbHelperAll(id, personaje, query);

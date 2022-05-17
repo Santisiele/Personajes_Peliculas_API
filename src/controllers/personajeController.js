@@ -21,38 +21,43 @@ router.get('/', Authenticate, async(req, res) => {
 });
 
 router.get('/:id', Authenticate, async(req, res) => {
-    console.log(`Request URL Param: ${req.params.id}`);
-    console.log(`This is a get operation`);
-
+    try{
     const personajeElegido = await personaje.getpersonajeById(req.params.id);
-
     return res.status(200).json(personajeElegido);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json(error);
+    }
 });
 
 router.post('', Authenticate, async(req, res) => {
-    console.log(`This is a post operation`);
-
+    try{
     const personajeCreado = await personaje.createpersonaje(req.body);
-
     return res.status(201).json(personajeCreado);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json(error);
+    }
 });
 
 router.put('/:id',Authenticate, async(req, res) => {
-    console.log(`Request URL Param: ${req.params.id}`);
-    console.log(`This is a put operation`);
-
+    try{
     const personajeEditado = await personaje.updatepersonajeById(req.params.id, req.body);
-
     return res.status(200).json(personajeEditado);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json(error);
+    }
 });
 
 router.delete('/:id',Authenticate, async(req, res) => {
-    console.log(`Request URL Param: ${req.params.id}`);
-    console.log(`This is a delete operation`);
-
+    try{
     const personajeEliminado = await personaje.deletepersonajeById(req.params.id);
-
     return res.status(200).json(personajeEliminado);
+    }catch(error){
+        console.log(error)
+        return res.status(500).json(error);
+    }
 });
 
 export default router;

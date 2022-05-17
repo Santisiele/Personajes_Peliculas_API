@@ -2,7 +2,6 @@ import dbHelperAll from '../Utils/helperAll.js'
 import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
 import dbHelperTitulo from '../Utils/helperTitulo.js'
 import 'dotenv/config'
-import { response } from 'express'
 
 const tablaPersonaje=process.env.DB_TABLA_personaje;
 const tablaPeliSerie=process.env.DB_TABLA_peliserie;

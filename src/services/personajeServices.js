@@ -4,7 +4,7 @@ import dbHelperEdad from '../Utils/helperEdad.js'
 import dbHelperNombreEdad from '../Utils/helperNombreEdad.js'
 import dbHelperPeliSerie from '../Utils/helperPeliSerie.js'
 import 'dotenv/config'
-import { response } from 'express'
+
 
 const tablaPersonaje=process.env.DB_TABLA_personaje;
 const tablaPeliSerie=process.env.DB_TABLA_peliserie;

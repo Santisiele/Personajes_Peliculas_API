@@ -12,7 +12,7 @@ export class moviesServices {
         console.log('Get all');
         let response = 0;
         if(titulo){
-            const query = `SELECT * FROM ${tablaPeliSerie} WHERE titulo = @titulo`;
+            const query = c;
             response = await dbHelperTitulo(titulo, query);
         }else{
             if(orden){
@@ -29,7 +29,7 @@ export class moviesServices {
     getMovieById = async(id) => {
         console.log('Get by ID');
         const query = `SELECT * FROM ${tablaPeliSerie} WHERE id=@id`;
-        const query2 = `SELECT ${tablaPersonaje}.* FROM ${tablaPeliSerie}, ${tablaPersonaje} , ${tablaInter} WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`
+        const query2 = `SELECT ${tablaPersonaje}.* FROM ${tablaPeliSerie}, ${tablaPersonaje} , ${tablaInter} WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje and ${tablaPeliSerie}.id = @id`
         const personaje = await dbHelperAll(id, undefined, query2);
         const PeliSerie = await dbHelperPeliSerie(id, undefined, query);
         PeliSerie.recordset[0].Personajes=personaje.recordset;

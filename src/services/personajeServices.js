@@ -11,27 +11,36 @@ const tablaPeliSerie=process.env.DB_TABLA_peliserie;
 const tablaInter=process.env.DB_TABLA_intermedia;
 
 export class personajeService {
-    getpersonaje = async(nombre, edad) => {
+    getpersonaje = async(nombre, edad,peso) => {
         console.log('Get all');
         let response = 0;
-        if (!nombre) {
-            if (!edad) {
-                const query = `sp_GetAll`;
-                response = await dbHelperAll(undefined, undefined, query);
-            } else {
-                const query = `SELECT * FROM ${tablaPersonaje} WHERE edad = @edad`;
-                response = await dbHelperEdad(edad, query);
-            }
-        }else {
-            if(edad){
-                const query = `SELECT * FROM ${tablaPersonaje} WHERE nombre = @nombre AND edad = @edad`;
-                response = await dbHelperNombreEdad(nombre, edad, query);
+        let query = `SELECT * FROM ${tablaPersonaje}`
+        let ifWhere = false;
+        if(nombre){
+            if(!ifWhere){
+                ifWhere=true
+                query+=` WHERE nombre = @nombre`;
             }else{
-                const query = `SELECT * FROM ${tablaPersonaje} WHERE nombre = @nombre`;
-                response = await dbHelperNombre(nombre, query);
+                query+= ` and nombre = @nombre`;
             }
         }
-
+        if(edad){
+            if(!ifWhere){
+                ifWhere=true
+                query+= ` WHERE edad = @edad`;
+            }else{
+                query+= ` and edad = @edad`;
+            }
+        }
+        if(peso){
+            if(!ifWhere){
+                ifWhere=true
+                query+= ` WHERE peso = @peso`;
+            }else{
+                query+= ` and peso = @peso`;
+            }
+        }
+        response= await dbHelperAll(undefined, {nombre, edad, peso}, query);
         return response.recordset;
     }
 

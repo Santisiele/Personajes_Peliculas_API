@@ -12,9 +12,8 @@ router.get('/', Authenticate, async(req, res) => {
     const personajes = await personaje.getpersonaje(nombre, edad);
     return res.status(200).json(personajes);
     }catch(error){
-        return res.send(error)
-    }finally{
-        console.log(`This is a get operation`);
+        console.log(error)
+        return res.status(500).json(error);
     }
     
 });

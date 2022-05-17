@@ -8,8 +8,10 @@ const personaje = new personajeService()
 router.get('/', Authenticate, async(req, res) => {
     let nombre = req.query.nombre;
     let edad = req.query.edad;
+    let peso = req.query.peso;
+    let idMovie = req.query.idMovie;
     try{
-    const personajes = await personaje.getpersonaje(nombre, edad);
+    const personajes = await personaje.getpersonaje(nombre, edad,peso,idMovie);
     return res.status(200).json(personajes);
     }catch(error){
         console.log(error)

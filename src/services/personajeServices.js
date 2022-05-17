@@ -11,7 +11,7 @@ const tablaPeliSerie=process.env.DB_TABLA_peliserie;
 const tablaInter=process.env.DB_TABLA_intermedia;
 
 export class personajeService {
-    getpersonaje = async(nombre, edad,peso) => {
+    getpersonaje = async(nombre, edad,peso,idMovie) => {
         console.log('Get all');
         let response = 0;
         let query = `SELECT * FROM ${tablaPersonaje}`
@@ -27,7 +27,7 @@ export class personajeService {
         if(edad){
             if(!ifWhere){
                 ifWhere=true
-                query+= ` WHERE edad = @edad`;
+                query+= `, ${tablaPeliSerie}, ${tablaInter} WHERE edad = @edad`;
             }else{
                 query+= ` and edad = @edad`;
             }
@@ -38,6 +38,13 @@ export class personajeService {
                 query+= ` WHERE peso = @peso`;
             }else{
                 query+= ` and peso = @peso`;
+            }
+        }if(idMovie){
+            if(!ifWhere){
+                ifWhere=true
+                query+= ` WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`;
+            }else{
+                query+= ` and ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`;
             }
         }
         response= await dbHelperAll(undefined, {nombre, edad, peso}, query);

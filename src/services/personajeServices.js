@@ -11,40 +11,19 @@ export class personajeService {
     getpersonaje = async(nombre, edad,peso,idMovie) => {
         console.log('Get all');
         let response = 0;
-        let query = `SELECT ${tablaPersonaje}.* FROM ${tablaPersonaje}, ${tablaInter}, ${tablaPeliSerie}`
-        let ifWhere = false;
+        let query = `SELECT ${tablaPersonaje}.id, ${tablaPersonaje}.nombre,${tablaPersonaje}.imagen FROM ${tablaPersonaje}, ${tablaInter} WHERE ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`
         if(nombre){
-            if(!ifWhere){
-                ifWhere=true
-                query+=` WHERE nombre = @nombre`;
-            }else{
-                query+= ` and nombre = @nombre`;
-            }
+            query+= ` and nombre = @nombre`;
         }
         if(edad){
-            if(!ifWhere){
-                ifWhere=true
-                query+= ` WHERE edad = @edad`;
-            }else{
-                query+= ` and edad = @edad`;
-            }
+            query+= ` and edad = @edad`;
         }
         if(peso){
-            if(!ifWhere){
-                ifWhere=true
-                query+= ` WHERE peso = @peso`;
-            }else{
-                query+= ` and peso = @peso`;
-            }
+            query+= ` and peso = @peso`;
         }if(idMovie){
-            if(!ifWhere){
-                ifWhere=true
-                query+= ` WHERE ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`;
-            }else{
-                query+= ` and ${tablaPeliSerie}.id = ${tablaInter}.idPeliSerie and ${tablaPersonaje}.id = ${tablaInter}.idPersonaje`;
-            }
+            query+= ` and ${tablaInter}.idPeliSerie = @idMovie`;
         }
-        response= await dbHelperAll(undefined, {nombre, edad, peso}, query);
+        response= await dbHelperAll(undefined, {nombre, edad, peso, idMovie}, query);
         return response.recordset;
     }
 

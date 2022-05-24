@@ -11,8 +11,8 @@ export class moviesServices {
         console.log('Get all');
         let response = 0;
         if(titulo){
-            const query = `SELECT * FROM ${tablaPeliSerie} WHERE titulo = @titulo`;
-            response = await dbHelperPeliSerie(undefined, titulo, query);
+            const query = `SELECT ${tablaPeliSerie}.id, ${tablaPeliSerie}.imagen, ${tablaPeliSerie}.titulo, ${tablaPeliSerie}.fechaCreacion FROM ${tablaPeliSerie} WHERE titulo = @titulo`;
+            response = await dbHelperPeliSerie(undefined, {titulo}, query);
         }else{
             if(orden){
                 const query = `SELECT * FROM ${tablaPeliSerie} ORDER BY titulo ${orden}`;

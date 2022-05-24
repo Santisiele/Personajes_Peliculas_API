@@ -11,6 +11,7 @@ const dbHelperAll= async (id, params, query) => {
         .input('peso',sql.Int, params?.peso ?? 0)
         .input('historia',sql.VarChar(255), params?.historia ?? '')
         .input('comidaFavorita',sql.VarChar(50), params?.comidaFavorita ?? '')
+        .input('idMovie',sql.Int, params?.idMovie ?? '')
         .query(query);
         return response;
 };

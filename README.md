@@ -1,4 +1,4 @@
-# DAI-TP2
+# DAI-TP2 Rowensztein - Sielecki
 
 ## Personajes con sus peliculas y series
 
@@ -12,4 +12,5 @@
 ### 7- Ejecutar el programa con el comando npm start
 ### 8- Abrir postman y correr en la ruta usada (suele ser 5000) el comando "localhost:(ruta,suele ser 5000)/auth/login"
 ### 9- Con eso obtenes el token para poder interactuar con la API, lo copias y en la sección de authorizacion seleccionas Bearer Token y lo pegas
-### 10-Interactuar con la coleccion de PostMan dada con las rutas movies y character
+### 10-Interactuar con la coleccion de PostMan dada con las rutas movies y character (poner usado el token en las colecciones)
+### 11- Cambiar los IDs que quieras y en los body cambiar los campos "completar" por los datos

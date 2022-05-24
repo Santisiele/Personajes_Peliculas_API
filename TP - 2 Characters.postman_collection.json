@@ -1,0 +1,418 @@
+{
+	"info": {
+		"_postman_id": "e7af6738-2674-4c31-8903-58b59c848eaa",
+		"name": "TP - 2 Characters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetToken",
+			"item": [
+				{
+					"name": "GenerarToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Character",
+			"item": [
+				{
+					"name": "GetAll (o por caracteristicas)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"SocialNetwork.jpg\",\r\n    \"titulo\":\"SocialNetwork\",\r\n    \"fechaCreacion\": \"20/03/2010\",\r\n    \"clasificacion\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/character",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"character"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": null,
+									"description": "Ingresar nombre en caso de querer buscar personajes por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "peso",
+									"value": null,
+									"description": "Ingresar peso en caso de querer buscar personajes por el peso (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "edad",
+									"value": null,
+									"description": "Ingresar edad en caso de querer buscar personajes por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "idMovie",
+									"value": null,
+									"description": "Ingresar idMovie en caso de querer buscar personajes por el mismo (y activar)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiSGFtaWx0b24iLCJ1c2VyRW1haWwiOiJJQ3VSb3J5ZVg0aEpVR0RiZW9AZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM0MDgwOTMsImV4cCI6MTY1MzQ0MjY1MywiYXVkIjoiaHR0cDovL1RQMkRBSVJvd2VuU2llbGUvIiwiaXNzIjoiaHR0cDovL3BlcnNvbmFqZS5vcnQvIiwic3ViIjoiSUN1Um9yeWVYNGhKVUdEYmVvIn0.RcV8nQwpdstk_ymXQVnyCisLBp4lBsLFNjJWSZ17cPY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/character/5",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"character",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"completar\",\r\n    \"nombre\": \"completar\",\r\n    \"edad\": \"completar\",\r\n    \"peso\": \"completar\",\r\n    \"historia\": \"completar\",\r\n    \"comidaFavorita\": \"completar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/character",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"character"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"completar\",\r\n    \"nombre\": \"completar\",\r\n    \"edad\": \"completar\",\r\n    \"peso\": \"completar\",\r\n    \"historia\": \"completar\",\r\n    \"comidaFavorita\": \"completar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/character/5",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"character",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/character/5",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"character",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "GetAll (o titulo o orden alfabetico)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"SocialNetwork.jpg\",\r\n    \"titulo\":\"SocialNetwork\",\r\n    \"fechaCreacion\": \"20/03/2010\",\r\n    \"clasificacion\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/movies/10",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"movies",
+								"10"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": null,
+									"description": "SOLO UNO (no los dos)Ingresar nombre en caso de querer buscar peliculas por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "orden",
+									"value": null,
+									"description": "Ordenar las peliculas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"SocialNetwork.jpg\",\r\n    \"titulo\":\"SocialNetwork\",\r\n    \"fechaCreacion\": \"20/03/2010\",\r\n    \"clasificacion\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/movies/10",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"movies",
+								"10"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": null,
+									"description": "SOLO UNO (no los dos)Ingresar nombre en caso de querer buscar peliculas por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "orden",
+									"value": null,
+									"description": "Ordenar las peliculas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"completar\",\r\n    \"titulo\":\"completar\",\r\n    \"fechaCreacion\": \"completar\",\r\n    \"clasificacion\": \"completar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/movies/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"movies",
+								""
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": null,
+									"description": "SOLO UNO (no los dos)Ingresar nombre en caso de querer buscar peliculas por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "orden",
+									"value": null,
+									"description": "Ordenar las peliculas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"completar\",\r\n    \"titulo\":\"completar\",\r\n    \"fechaCreacion\": \"completar\",\r\n    \"clasificacion\": \"completar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/movies/10",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"movies",
+								"10"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": null,
+									"description": "SOLO UNO (no los dos)Ingresar nombre en caso de querer buscar peliculas por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "orden",
+									"value": null,
+									"description": "Ordenar las peliculas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imagen\": \"completar\",\r\n    \"titulo\":\"completar\",\r\n    \"fechaCreacion\": \"completar\",\r\n    \"clasificacion\": \"completar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/movies/10",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"movies",
+								"10"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": null,
+									"description": "SOLO UNO (no los dos)Ingresar nombre en caso de querer buscar peliculas por el mismo (y activar)",
+									"disabled": true
+								},
+								{
+									"key": "orden",
+									"value": null,
+									"description": "Ordenar las peliculas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

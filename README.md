@@ -15,3 +15,5 @@
 ### 10- Con eso obtenes el token para poder interactuar con la API, lo copias y en la sección de authorizacion seleccionas Bearer Token y lo pegas
 ### 11-Interactuar con la coleccion de PostMan dada con las rutas movies y character (poner usado el token en las colecciones)
 ### 12- Cambiar los IDs que quieras y en los body cambiar los campos "completar" por los datos
+
+#### Aclaracion: los stored procedures en la base de datos los creamos pensando que ibamos a poder implementarlos pero no pudimos

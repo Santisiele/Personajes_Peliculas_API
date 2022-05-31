@@ -5,7 +5,7 @@
 ### 1- Crear base de datos llamada DAI-Personaje
 ### 1- b- Abrir las dependecnias de TC/IP de SQL, y despues iniciar el SQL AGENT y SQL Browser en el administrador de equipos
 ### 2- Ejecutar el script LoginAndUser.sql
-### 3- Ejecutar el script script.sql
+### 3- Ejecutar script.sql
 ### 4- Abrir el proyecto en Visual Studio
 ### 5- Crear un archivo .env y pegar la info dada
 ### 6- Tener la version 16.15.0 de node

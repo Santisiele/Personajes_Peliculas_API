@@ -7,7 +7,7 @@
 ### 2- Ejecutar el script LoginAndUser.sql
 ### 3- Ejecutar script.sql
 ### 4- Abrir el proyecto en Visual Studio
-### 5- Crear un archivo .env y pegar la info dada
+### 5- Crear un archivo .env y pegar la info dada y cambiar el valor de DB_SERVER por tu servidor de base de datos
 ### 6- Tener la version 16.15.0 de node
 ### 7- Descargar las dependecnias usadas con el comando npm -i
 ### 7- b- En caso de que falte alguna, ejecutar npm i cors dotenv express mssql passport passport-jwt

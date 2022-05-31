@@ -17,4 +17,4 @@
 ### 11-Interactuar con la coleccion de PostMan dada con las rutas movies y character (poner usado el token en las colecciones)
 ### 12- Cambiar los IDs que quieras y en los body cambiar los campos "completar" por los datos
 
-#### Aclaracion: los stored procedures en la base de datos los creamos pensando que ibamos a poder implementarlos pero no pudimos
+#### Aclaracion: en postman hay que cambiar la variable "urlBase" de la coleccion en caso de no usar el puerto 5000, cambiarlo por el usado
